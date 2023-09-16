@@ -20,6 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -53,5 +54,22 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new RecuperarSenha($token));
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            $user->perfil()->create([
+                'foto' => 'default.png',
+                'bio' => "Oi, me chamo {$user->name}!",
+            ]);
+        });
+    }
+
+    public function perfil()
+    {
+        return $this->hasOne(Perfil::class, 'usuario_id', 'id');
     }
 }

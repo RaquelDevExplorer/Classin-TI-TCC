@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\CadernoController;
+use App\Http\Controllers\ComunidadeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Profile\ProfileImageController;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +22,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('auth')->get('/caderno', [CadernoController::class, 'show'])->name('caderno.show');
+
+Route::middleware('auth')->get('/agenda', [AgendaController::class, 'show'])->name('agenda.show');
+
+Route::middleware('auth')->get('/comunidade', [ComunidadeController::class, 'show'])->name('comunidade.show');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::prefix('perfil')->group(function () {
     Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');

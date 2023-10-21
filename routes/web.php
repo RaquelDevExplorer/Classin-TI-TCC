@@ -5,6 +5,7 @@ use App\Http\Controllers\CadernoController;
 use App\Http\Controllers\ComunidadeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Profile\ProfileImageController;
+use App\Http\Controllers\UserStorageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,16 +23,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->get('/caderno', [CadernoController::class, 'show'])->name('caderno.show');
+Route::middleware('auth')->get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
+Route::middleware('auth')->get('/comunidade', [ComunidadeController::class, 'index'])->name('comunidade.index');
 
-Route::middleware('auth')->get('/agenda', [AgendaController::class, 'show'])->name('agenda.show');
+// Busca arquivos de upload
+// TODO: Terminar aqui
+// Route::get('/file/{filename}')
 
-Route::middleware('auth')->get('/comunidade', [ComunidadeController::class, 'show'])->name('comunidade.show');
+// Rotas do caderno
+Route::middleware('auth')->prefix('caderno')->group(function () {
+    Route::get('/', [CadernoController::class, 'index'])->name('caderno.index');
+    Route::post('/', [CadernoController::class, 'store'])->name('caderno.store');
+    
+    // Mostra a folha do caderno
+    Route::get('/{folha:id}', [CadernoController::class, 'show'])->name('caderno.show');
+});
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
+// Rotas do perfil
 Route::prefix('perfil')->group(function () {
     Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/{user:username}', [ProfileController::class, 'show'])->name('profile.show');

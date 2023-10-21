@@ -6,15 +6,15 @@
                 <div class='flex justify-between items-center pb-3'>
                     <img src="{{ $profile->getFotoUrl() }}" class='w-1/6 h-1/6 rounded-full' />
                     <div class='text-center'>
-                        <h3>...</h3>
+                        <h3>{{ $profile->getTotalPosts() }}</h3>
                         <p>Publicações</p>
                     </div>
                     <div class='text-center'>
-                        <h3>...</h3>
+                        <h3>{{ $profile->getTotalSeguidores() }}</h3>
                         <p>Seguidores</p>
                     </div>
                     <div class='text-center'>
-                        <h3>...</h3>
+                        <h3>{{ $profile->getTotalSeguindo() }}</h3>
                         <p>Seguindo</p>
                     </div>
                 </div>

@@ -65,6 +65,14 @@ class User extends Authenticatable
                 'foto' => 'default.png',
                 'bio' => "Oi, me chamo {$user->name}!",
             ]);
+
+            $user->perfil->caderno()->create([
+
+            ]);
+
+            $user->perfil->agenda()->create([
+
+            ]);
         });
     }
 

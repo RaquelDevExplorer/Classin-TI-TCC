@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class ComunidadeController extends Controller
 {
 
-    public function show()
+    public function index()
     {
 
     }

@@ -1,0 +1,5 @@
+@props(['post'])
+
+<div>
+
+</div>

@@ -23,8 +23,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
-Route::middleware('auth')->get('/comunidade', [ComunidadeController::class, 'index'])->name('comunidade.index');
+Route::middleware('auth')->prefix('agenda')->group(function () {
+    Route::get('/', [AgendaController::class, 'index'])->name('agenda.index');
+});
+
+Route::prefix('comunidade')->group(function () {
+    Route::get('/', [ComunidadeController::class, 'index'])->name('comunidade.index');
+});
 
 // Busca arquivos de upload
 // TODO: Terminar aqui
@@ -34,7 +39,7 @@ Route::middleware('auth')->get('/comunidade', [ComunidadeController::class, 'ind
 Route::middleware('auth')->prefix('caderno')->group(function () {
     Route::get('/', [CadernoController::class, 'index'])->name('caderno.index');
     Route::post('/', [CadernoController::class, 'store'])->name('caderno.store');
-    
+
     // Mostra a folha do caderno
     Route::get('/{folha:id}', [CadernoController::class, 'show'])->name('caderno.show');
 });

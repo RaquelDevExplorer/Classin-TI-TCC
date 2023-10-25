@@ -29,6 +29,7 @@ Route::middleware('auth')->prefix('agenda')->group(function () {
 
 Route::prefix('comunidade')->group(function () {
     Route::get('/', [ComunidadeController::class, 'index'])->name('comunidade.index');
+    Route::get('/post/{post:id}', [ComunidadeController::class, 'show'])->name('comunidade.show');
 });
 
 // Busca arquivos de upload

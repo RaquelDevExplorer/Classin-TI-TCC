@@ -23,14 +23,9 @@ class Perfil extends Model
         'privado',
     ];
 
-    /**
-     * Retrieve the URL of the photo for the current profile.
-     *
-     * @return string The URL of the photo.
-     */
-    public function getFotoUrl()
+    public function getFotoAttribute($value)
     {
-        return "/storage/profiles/{$this->foto}";
+        return "/storage/profiles/$value";
     }
 
     /**
@@ -64,6 +59,11 @@ class Perfil extends Model
     }
 
     // Relacionamentos
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'usuario_id');
+    }
 
     public function agenda()
     {

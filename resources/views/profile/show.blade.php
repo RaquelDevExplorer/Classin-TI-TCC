@@ -4,7 +4,7 @@
             <div class='md:px-20'>
                 {{-- Foto de perfil e informações de seguidores --}}
                 <div class='flex justify-between items-center pb-3'>
-                    <img src="{{ $profile->getFotoUrl() }}" class='w-1/6 h-1/6 rounded-full' />
+                    <img src="{{ $profile->foto }}" class='w-1/6 h-1/6 rounded-full' />
                     <div class='text-center'>
                         <h3>{{ $profile->getTotalPosts() }}</h3>
                         <p>Publicações</p>

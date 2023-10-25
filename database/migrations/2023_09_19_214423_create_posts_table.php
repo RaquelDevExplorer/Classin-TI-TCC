@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('perfil_id');
-            $table->unsignedBigInteger('post_ref_id');
-            $table->unsignedBigInteger('folha_id');
+            $table->unsignedBigInteger('post_ref_id')->nullable();
+            $table->unsignedBigInteger('folha_id')->nullable();
             $table->string('corpo');
 
             $table->foreign('perfil_id')->references('id')->on('perfis');

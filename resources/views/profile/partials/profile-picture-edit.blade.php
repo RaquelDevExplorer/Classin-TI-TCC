@@ -14,7 +14,7 @@
         @method('patch')
 
         <div>
-            <img id='profile-img' src="{{ $profile->getFotoUrl() }}" class='w-1/6 object-cover rounded-full' />
+            <img id='profile-img' src="{{ $profile->foto }}" class='w-1/6 object-cover rounded-full' />
         </div>
 
         <div>

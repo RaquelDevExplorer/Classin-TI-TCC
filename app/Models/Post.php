@@ -12,29 +12,38 @@ class Post extends Model
     protected $table = 'posts';
 
     protected $fillable = [
-        'usuario_id',
+        'perfil_id',
         'post_ref_id',
         'folha_id',
         'corpo',
     ];
 
-    public function usuario()
+    protected $appends = [
+        'created_at_formatted'
+    ];
+
+    public function getCreatedAtFormattedAttribute()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->created_at->diffForHumans();
+    }
+
+    public function perfil()
+    {
+        return $this->belongsTo(Perfil::class);
     }
 
     public function folha()
     {
-        return $this->hasOne(Folha::class);
+        return $this->belongsTo(Folha::class);
     }
 
     public function post_ref()
     {
-        return $this->hasOne(Post::class);
+        return $this->belongsTo(Post::class);
     }
 
-    public function comments()
+    public function comentarios()
     {
-        return $this->belongsToMany(Comment::class);
+        return $this->hasMany(Comentario::class);
     }
 }

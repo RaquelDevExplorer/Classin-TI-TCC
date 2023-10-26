@@ -40,6 +40,7 @@ Route::prefix('comunidade')->group(function () {
 Route::middleware('auth')->prefix('caderno')->group(function () {
     Route::get('/', [CadernoController::class, 'index'])->name('caderno.index');
     Route::post('/', [CadernoController::class, 'store'])->name('caderno.store');
+    Route::put('/{folha:id}', [CadernoController::class, 'update'])->name('caderno.update');
 
     // Mostra a folha do caderno
     Route::get('/{folha:id}', [CadernoController::class, 'show'])->name('caderno.show');

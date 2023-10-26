@@ -35,7 +35,7 @@ class CadernoController extends Controller
     public function update(Request $request, Folha $folha)
     {
         $validated = $request->validate([
-            'json' => 'required',
+            'folha_json' => 'required',
         ]);
 
         \Storage::put($folha->caminho, json_encode($validated['json']));

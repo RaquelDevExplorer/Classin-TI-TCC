@@ -47,7 +47,9 @@ class CadernoController extends Controller
             $folha->delete();
             return back();
         } else {
-            return view('errors.403');
+            return response()->view('errors.403', [
+                'message' => 'Essa Folha não pertence a você!',
+            ], 403);
         }
     }
 

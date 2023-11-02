@@ -65,16 +65,6 @@ class Perfil extends Model
         return $this->belongsTo(User::class, 'usuario_id');
     }
 
-    public function agenda()
-    {
-        return $this->hasOne(Agenda::class);
-    }
-
-    public function caderno()
-    {
-        return $this->hasOne(Caderno::class);
-    }
-
     public function posts()
     {
         return $this->hasMany(Post::class);

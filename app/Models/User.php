@@ -66,18 +66,23 @@ class User extends Authenticatable
                 'bio' => "Oi, me chamo {$user->name}!",
             ]);
 
-            $user->perfil->caderno()->create([
-
-            ]);
-
-            $user->perfil->agenda()->create([
-
-            ]);
+            $user->caderno()->create([]);
+            $user->agenda()->create([]);
         });
     }
 
     public function perfil()
     {
         return $this->hasOne(Perfil::class, 'usuario_id', 'id');
+    }
+
+    public function agenda()
+    {
+        return $this->hasOne(Agenda::class, 'usuario_id', 'id');
+    }
+
+    public function caderno()
+    {
+        return $this->hasOne(Caderno::class, 'usuario_id', 'id');
     }
 }

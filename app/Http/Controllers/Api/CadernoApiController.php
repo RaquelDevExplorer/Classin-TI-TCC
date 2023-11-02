@@ -10,7 +10,7 @@ class CadernoApiController extends Controller
 
     public function getFolhas(Request $request)
     {
-        $folhas = $request->user()->perfil->caderno->folhas->where('is_public', false);
+        $folhas = $request->user()->caderno->folhas->where('is_public', false);
         return response()->json(compact('folhas'));
     }
 

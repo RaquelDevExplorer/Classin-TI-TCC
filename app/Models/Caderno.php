@@ -12,7 +12,7 @@ class Caderno extends Model
     protected $table = 'cadernos';
 
     protected $fillable = [
-        'perfil_id',
+        'usuario_id',
     ];
 
     public function folhas()

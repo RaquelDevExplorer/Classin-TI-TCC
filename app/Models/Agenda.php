@@ -12,7 +12,7 @@ class Agenda extends Model
     protected $table = 'agendas';
 
     protected $fillable = [
-        'caderno_id',
+        'usuario_id',
         // TODO
     ];
 

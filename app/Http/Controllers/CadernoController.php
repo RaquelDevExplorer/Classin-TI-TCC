@@ -13,7 +13,7 @@ class CadernoController extends Controller
         // Busca as folhas que não são públicas
         // (Folhas públicas são folhas copiadas na comunidade)
         $folhas = $request->user()
-            ->perfil->caderno->folhas
+            ->caderno->folhas
             ->where('is_public', false);
 
         return view('caderno.index', compact('folhas'));
@@ -27,7 +27,7 @@ class CadernoController extends Controller
 
     public function store(Request $request)
     {
-        $folha = $request->user()->perfil->caderno->folhas()->create();
+        $folha = $request->user()->caderno->folhas()->create();
         return redirect()->route('caderno.show', $folha->id);
     }
 
@@ -43,8 +43,12 @@ class CadernoController extends Controller
 
     public function destroy(Request $request, Folha $folha)
     {
-        $folha->delete();
-        return back();
+        if($request->user()->caderno->id == $folha->caderno_id) {
+            $folha->delete();
+            return back();
+        } else {
+            return view('errors.403');
+        }
     }
 
 }

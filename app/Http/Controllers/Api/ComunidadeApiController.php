@@ -29,7 +29,7 @@ class ComunidadeApiController extends Controller
         // Cria cópia pública da folha
         if(isset($validated['folha_id'])) {
             $folha = Folha::find($validated['folha_id']);
-            $folhaCopia = $request->user()->perfil->caderno->folhas()->create([
+            $folhaCopia = $request->user()->caderno->folhas()->create([
                 'is_public' => true,
             ]);
 

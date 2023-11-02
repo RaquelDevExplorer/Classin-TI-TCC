@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('reacoes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('perfil_id')->constrained('perfis')->nullable();
-            $table->foreignId('post_id')->constrained()->nullable();
-            $table->foreignId('comentario_id')->constrained();
+
+            $table->unsignedBigInteger('post_id')->nullable();
+            $table->unsignedBigInteger('comentario_id')->nullable();
+
             $table->string('target_type');
 
+            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('comentario_id')->references('id')->on('comentarios');
             $table->timestamps();
         });
     }

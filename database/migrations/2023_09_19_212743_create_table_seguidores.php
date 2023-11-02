@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('seguidores', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('seguidor_id');
-            $table->unsignedBigInteger('perfil_id');
-
-            $table->foreign('seguidor_id')->references('id')->on('perfis');
-            $table->foreign('perfil_id')->references('id')->on('perfis');
+            $table->foreignId('seguidor_id')->constrained('perfis');
+            $table->foreignId('perfil_id')->constrained('perfis');
 
             $table->timestamps();
         });

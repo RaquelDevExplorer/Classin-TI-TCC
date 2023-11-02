@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('perfis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('usuario_id');
+            $table->foreignId('usuario_id')->constrained('users');
             $table->string('foto');
             $table->date('dataNasc')->nullable();
             $table->text('bio')->nullable();
@@ -22,9 +22,8 @@ return new class extends Migration
             $table->string('estado')->nullable();
             $table->string('pais')->nullable();
             $table->boolean('privado')->default(false);
-            $table->timestamps();
 
-            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 

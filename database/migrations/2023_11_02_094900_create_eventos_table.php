@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comentarios', function (Blueprint $table) {
+        Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('perfil_id')->constrained('perfis');
-            $table->foreignId('post_id')->constrained();
-            $table->text('corpo');
+            $table->string('titulo');
+            $table->string('descricao')->nullable();
+            $table->string('estado');
+            $table->boolean('lembrete')->default(false);
+            $table->foreignId('agenda_id')->constrained();
             
+            $table->dateTime('dataInicio');
+            $table->dateTime('dataFim');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('eventos');
     }
 };

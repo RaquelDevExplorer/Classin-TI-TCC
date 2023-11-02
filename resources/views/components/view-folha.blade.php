@@ -2,7 +2,15 @@
 
 <div x-data="folha">
     <template x-for="block in folha.blocks" :key="JSON.stringify(block)">
-        <div id="block" x-html="block.html" class="p-2" contenteditable @keydown.slash="onSlash" @keydown.enter="onEnter" x-on:blur="lostFocus"></div>
+        <div 
+            id="block" 
+            x-html="block.html" 
+            class="p-2" 
+            contenteditable 
+            @keydown.slash="onSlash" 
+            @keydown.enter="onEnter" 
+            x-on:blur="lostFocus"
+            ></div>
     </template>
 
     <template id="menu" x-model="showMenu" x-if="showMenu">

@@ -24,5 +24,13 @@ Route::get('/escolas', function () {
     return json_encode(compact('escolas'));
 })->name('api.escolas');
 
+// Retorna as folhas do caderno
+Route::get('/folhas', [App\Http\Controllers\API\CadernoApiController::class, 'getFolhas'])->name('api.folhas');
+
 // Retorna posts da comunidade em paginação
 Route::get('/comunidade/posts', [App\Http\Controllers\API\ComunidadeApiController::class, 'getPosts'])->name('api.comunidade.posts');
+
+// Cria um post na comunidade
+Route::post('/comunidade/posts', [App\Http\Controllers\API\ComunidadeApiController::class, 'storePost'])->name('api.comunidade.posts.store');
+
+Route::post('/comunidade/posts/repost', [App\Http\Controllers\API\ComunidadeApiController::class, 'repost'])->name('api.comunidade.repost');

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('caderno_id');
             $table->string('caminho')->nullable();
             $table->string('image')->default('folha-default.jpg');
+            $table->boolean('is_public')->default(0);
 
             $table->foreign('caderno_id')->references('id')->on('cadernos');
 

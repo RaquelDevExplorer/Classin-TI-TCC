@@ -10,12 +10,11 @@ class CadernoController extends Controller
 
     public function index(Request $request)
     {
-        $folhas = $request->user()->perfil->caderno->folhas;
-
-        // Adiciona o JSON do storage ao objeto para enviar para a view
-        foreach ($folhas as $folha) {
-            $folha->json = \Storage::json($folha->caminho);
-        }
+        // Busca as folhas que não são públicas
+        // (Folhas públicas são folhas copiadas na comunidade)
+        $folhas = $request->user()
+            ->perfil->caderno->folhas
+            ->where('is_public', false);
 
         return view('caderno.index', compact('folhas'));
     }

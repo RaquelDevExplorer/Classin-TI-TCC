@@ -5,7 +5,7 @@
                 <img :src="folha.image">
             </div>
             <div class="flex items-center justify-between p-2">
-                <h3 class="font-bold text-lg" x-text="folha.json.title"></h3>
+                <h3 class="font-bold text-lg" x-text="folha.folhaJson.title"></h3>
             </div>
         </div>
     </template>
@@ -27,7 +27,7 @@
 
 <script>
 
-function criarFolha() { // VERIFICAR ERRO AQUI!!!
+function criarFolha() {
     const url = '{{ route("caderno.store") }}'
     console.log(typeof url, url);
     fetch(url, {

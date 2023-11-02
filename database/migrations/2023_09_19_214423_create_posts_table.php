@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('post_ref_id')->nullable();
             $table->unsignedBigInteger('folha_id')->nullable();
             $table->string('corpo');
+            $table->string('image')->nullable();
+            $table->string('file')->nullable();
 
             $table->foreign('perfil_id')->references('id')->on('perfis');
             $table->foreign('post_ref_id')->references('id')->on('posts');

@@ -16,6 +16,11 @@ class Folha extends Model
         'caderno_id',
         'caminho',
         'image',
+        'is_public',
+    ];
+
+    protected $appends = [
+        'folhaJson',
     ];
 
     public static function boot()
@@ -42,6 +47,11 @@ class Folha extends Model
     }
 
     public function getFolhaJson()
+    {
+        return \Storage::json($this->caminho);
+    }
+
+    public function getFolhaJsonAttribute()
     {
         return \Storage::json($this->caminho);
     }

@@ -15,7 +15,7 @@
                 {{-- Menu superior --}}
                 <div>
                     <h1>
-
+                        asdasdas
                     </h1>
                 </div>
 
@@ -24,7 +24,7 @@
 
 
                 {{-- Div principal para mostrar os posts da comunidade --}}
-                <div id="posts-div" x-data="{ posts: [], nextPage: false }" x-init="getPosts(nextPage).then(p => { posts = p.posts; nextPage = p.posts.nextPage });" class="md:p-10">
+                <div id="posts-div" x-data="{ posts: { data: [] }, nextPage: false }" x-init="getPosts(nextPage).then(p => { posts = p.posts; nextPage = p.posts.next_page_url })" class="md:p-10">
                     <template x-for="post in posts.data">
                         <x-comunidade-post post="post"></x-comunidade-post>
                     </template>
@@ -52,13 +52,29 @@
             return false;
         }
 
-        const res = await axios.get(nextPage ? nextPage : '/api/comunidade/posts');
+        const res = await axios.get(nextPage ? nextPage : "{{ route('api.comunidade.posts') }}");
         return res.data
     }
 
     function postClicked(e) {
         const postId = e.target.closest('.post-div').getAttribute('post-id');
         window.location.href = `/comunidade/post/${postId}`;
+    }
+
+    function repostClicked(e) {
+        const postId = e.target.closest('.post-div').getAttribute('post-id');
+        const body = e.target.closest('.post-div').querySelector('textarea[name="body"]').value;
+
+        axios.post('{{ route('api.comunidade.repost') }}', {
+            post_ref_id: postId,
+            body
+        })
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(err => {
+                alert('Ocorreu um erro ao realizar o seu repost!');
+            })
     }
 
     function profileClicked(e) {

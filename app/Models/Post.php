@@ -16,11 +16,22 @@ class Post extends Model
         'post_ref_id',
         'folha_id',
         'corpo',
+        'image',
+        'file',
     ];
 
     protected $appends = [
         'created_at_formatted'
     ];
+
+    public function getImageAttribute($value)
+    {
+        if ($value) {
+            return 'storage/' . str_replace('public/', '', $value);
+        }
+
+        return null;
+    }
 
     public function getCreatedAtFormattedAttribute()
     {

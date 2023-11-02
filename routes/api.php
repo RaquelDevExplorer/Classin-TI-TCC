@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ReacaoApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,5 @@ Route::get('/comunidade/posts', [App\Http\Controllers\API\ComunidadeApiControlle
 Route::post('/comunidade/posts', [App\Http\Controllers\API\ComunidadeApiController::class, 'storePost'])->name('api.comunidade.posts.store');
 
 Route::post('/comunidade/posts/repost', [App\Http\Controllers\API\ComunidadeApiController::class, 'repost'])->name('api.comunidade.repost');
+
+Route::put('/comunidade/react/{target_id}/{target_type}', [App\Http\Controllers\API\ReacaoApiController::class, 'toggleReacao'])->name('api.comunidade.react');

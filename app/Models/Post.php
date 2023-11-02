@@ -21,7 +21,8 @@ class Post extends Model
     ];
 
     protected $appends = [
-        'created_at_formatted'
+        'created_at_formatted',
+        'reacoes_count'
     ];
 
     public function getImageAttribute($value)
@@ -31,6 +32,11 @@ class Post extends Model
         }
 
         return null;
+    }
+
+    public function getReacoesCountAttribute()
+    {
+        return $this->reacoes()->count();
     }
 
     public function getCreatedAtFormattedAttribute()
@@ -56,5 +62,10 @@ class Post extends Model
     public function comentarios()
     {
         return $this->hasMany(Comentario::class);
+    }
+
+    public function reacoes()
+    {
+        return $this->hasMany(Reacao::class);
     }
 }

@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\AgendaController;
-use App\Http\Controllers\CadernoController;
-use App\Http\Controllers\ComunidadeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Profile\ProfileImageController;
-use App\Http\Controllers\UserStorageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\EventoController;
+use App\Http\Controllers\CadernoController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ComunidadeController;
+use App\Http\Controllers\UserStorageController;
+use App\Http\Controllers\Profile\ProfileImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,20 @@ Route::prefix('perfil')->group(function () {
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/picture/edit', [ProfileImageController::class, 'edit'])->name('profile.picture.update');
     Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Rotas da agenda
+Route::prefix('agenda')->group(function () {
+    Route::get('/', [AgendaController::class, 'index'])->name('agenda.index');
+    Route::get('/{dia}/{mes}/{ano}', [AgendaController::class, 'show'])->name('agenda.show');
+    Route::get('/create', [AgendaController::class, 'create'])->name('agenda.create');
+
+    // Rotas da agenda para eventos
+    Route::prefix('evento')->group(function () {
+        Route::post('/', [EventoController::class, 'store'])->name('agenda.evento.store');
+        Route::put('/{evento:id}', [EventoController::class, 'update'])->name('agenda.evento.update');
+        Route::get('/{evento:id}', [EventoController::class, 'show'])->name('agenda.evento.show');
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agenda extends Model
 {
+
     use HasFactory;
 
     protected $table = 'agendas';
 
     protected $fillable = [
         'usuario_id',
-        // TODO
     ];
 
     public function eventos()
     {
-        // TODO
-        // return $this->hasMany(Evento::class);
+        return $this->hasMany(Evento::class);
     }
+    
 }

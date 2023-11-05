@@ -3,11 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Seguidor;
+use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\RecuperarSenha;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -84,5 +85,17 @@ class User extends Authenticatable
     public function caderno()
     {
         return $this->hasOne(Caderno::class, 'usuario_id', 'id');
+    }
+
+    public function seguidos()
+    {
+        return $this->belongsToMany(User::class, Seguidor::class, 'seguidor_id', 'seguido_id')
+                ->where('seguido_id', '!=', $this->id);
+    }
+
+    public function seguidores()
+    {
+        return $this->belongsToMany(User::class, Seguidor::class, 'seguido_id', 'seguidor_id')
+                ->where('seguidor_id', '!=', $this->id);
     }
 }

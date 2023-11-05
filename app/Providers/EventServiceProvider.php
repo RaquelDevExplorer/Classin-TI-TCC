@@ -2,10 +2,18 @@
 
 namespace App\Providers;
 
+use App\Events\PostCurtido;
+use App\Events\EventoProximo;
+use App\Events\PostComentado;
+use App\Events\UsuarioSeguido;
+use App\Listeners\SendPostCurtido;
+use App\Listeners\SendEventoProximo;
+use App\Listeners\SendPostComentado;
+use App\Listeners\SendUsuarioSeguido;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +26,18 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        PostComentado::class => [
+            SendPostComentado::class,
+        ],
+
+        PostCurtido::class => [
+            SendPostCurtido::class,
+        ],
+
+        UsuarioSeguido::class => [
+            SendUsuarioSeguido::class,
+        ]
     ];
 
     /**

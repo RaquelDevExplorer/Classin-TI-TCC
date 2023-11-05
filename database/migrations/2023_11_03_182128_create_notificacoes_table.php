@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('seguidores', function (Blueprint $table) {
+        Schema::create('notificacoes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('seguidor_id')->constrained('perfis');
-            $table->foreignId('perfil_id')->constrained('perfis');
-
+            $table->foreignId('user_id')->constrained();
+            $table->string('corpo');
+            $table->boolean('lido');
+            $table->string('tipo');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('seguidores');
+        Schema::dropIfExists('notificacoes');
     }
 };

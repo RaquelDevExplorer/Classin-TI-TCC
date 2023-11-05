@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ComunidadeController;
 use App\Http\Controllers\UserStorageController;
 use App\Http\Controllers\Profile\ProfileImageController;
+use App\Http\Controllers\Comunidade\SeguirUsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,9 @@ Route::middleware('auth')->prefix('agenda')->group(function () {
 Route::prefix('comunidade')->group(function () {
     Route::get('/', [ComunidadeController::class, 'index'])->name('comunidade.index');
     Route::get('/post/{post:id}', [ComunidadeController::class, 'show'])->name('comunidade.show');
+
+    Route::post('/follow/{user:id}', [SeguirUsuarioController::class, 'store'])->name('comunidade.usuario.follow');
+    Route::delete('/follow/{user:id}', [SeguirUsuarioController::class, 'destroy'])->name('comunidade.usuario.unfollow');
 });
 
 // Busca arquivos de upload

@@ -27,6 +27,10 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
+        EventoProximo::class => [
+            SendEventoProximo::class,
+        ],
+
         PostComentado::class => [
             SendPostComentado::class,
         ],

@@ -19,4 +19,9 @@ class Caderno extends Model
     {
         return $this->hasMany(Folha::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'usuario_id');
+    }
 }

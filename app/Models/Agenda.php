@@ -20,5 +20,10 @@ class Agenda extends Model
     {
         return $this->hasMany(Evento::class);
     }
-    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'usuario_id');
+    }
+
 }
